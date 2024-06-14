@@ -12,6 +12,7 @@ import EmailSignIn from '@/components/ui/AuthForms/EmailSignIn';
 import ForgotPassword from '@/components/ui/AuthForms/ForgotPassword';
 import UpdatePassword from '@/components/ui/AuthForms/UpdatePassword';
 import SignUp from '@/components/ui/AuthForms/Signup';
+import clsx from 'clsx';
 
 export default async function SignIn({
   params,
@@ -51,7 +52,14 @@ export default async function SignIn({
   }
 
   return (
-    <div className="card bg-base-100 p-6">
+    <div
+      className={clsx(
+        'card p-6 shadow-2xl',
+        viewProp === 'signup'
+          ? 'bg-neutral text-neutral-content'
+          : 'bg-base-100 text-base-content'
+      )}
+    >
       <h1 className="card-title">
         {viewProp === 'forgot_password'
           ? 'Reset Password'

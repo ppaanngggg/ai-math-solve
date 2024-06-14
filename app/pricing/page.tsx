@@ -1,4 +1,4 @@
-import Pricing from '@/components/ui/Pricing/Pricing';
+import Pricing from '@/app/pricing/Pricing';
 import { createClient } from '@/utils/supabase/server';
 
 export default async function PricingPage() {
@@ -8,7 +8,7 @@ export default async function PricingPage() {
     data: { user }
   } = await supabase.auth.getUser();
 
-  const { data: subscription, error } = await supabase
+  const { data: subscription } = await supabase
     .from('subscriptions')
     .select('*, prices(*, products(*))')
     .in('status', ['trialing', 'active'])

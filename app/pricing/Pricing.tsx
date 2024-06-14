@@ -54,12 +54,7 @@ export default function Pricing({ user, products, subscription }: Props) {
 
     if (!user) {
       setPriceIdLoading(undefined);
-      return router.push('/signin/signup');
-    }
-
-    if (subscription) {
-      setPriceIdLoading(undefined);
-      return router.push('/account');
+      return router.push('/signin');
     }
 
     const { errorRedirect, sessionId } = await checkoutWithStripe(

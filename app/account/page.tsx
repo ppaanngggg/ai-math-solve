@@ -1,4 +1,4 @@
-import CustomerPortalForm from '@/components/ui/AccountForms/CustomerPortalForm';
+import CustomerPortalForm from '@/app/account/CustomerPortalForm';
 import { createClient } from '@/utils/supabase/server';
 import { redirect } from 'next/navigation';
 
