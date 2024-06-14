@@ -1,11 +1,9 @@
 'use client';
 
 import Button from '@/components/ui/Button';
-import { useRouter, usePathname } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { createStripePortal } from '@/utils/stripe/server';
-import Link from 'next/link';
-import Card from '@/components/ui/Card';
 import { Tables } from '@/types_db';
 
 type Subscription = Tables<'subscriptions'>;
@@ -21,7 +19,7 @@ type SubscriptionWithPriceAndProduct = Subscription & {
 };
 
 interface Props {
-  subscription: SubscriptionWithPriceAndProduct | null;
+  subscription: SubscriptionWithPriceAndProduct;
 }
 
 export default function CustomerPortalForm({ subscription }: Props) {
@@ -29,13 +27,11 @@ export default function CustomerPortalForm({ subscription }: Props) {
   const currentPath = usePathname();
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const subscriptionPrice =
-    subscription &&
-    new Intl.NumberFormat('en-US', {
-      style: 'currency',
-      currency: subscription?.prices?.currency!,
-      minimumFractionDigits: 0
-    }).format((subscription?.prices?.unit_amount || 0) / 100);
+  const subscriptionPrice = new Intl.NumberFormat('en-US', {
+    style: 'currency',
+    currency: subscription.prices?.currency!,
+    minimumFractionDigits: 0
+  }).format((subscription.prices?.unit_amount || 0) / 100);
 
   const handleStripePortalRequest = async () => {
     setIsSubmitting(true);
@@ -45,16 +41,15 @@ export default function CustomerPortalForm({ subscription }: Props) {
   };
 
   return (
-    <Card
-      title="Your Plan"
-      description={
-        subscription
-          ? `You are currently on the ${subscription?.prices?.products?.name} plan.`
-          : 'You are not currently subscribed to any plan.'
-      }
-      footer={
-        <div className="flex flex-col items-start justify-between sm:flex-row sm:items-center">
-          <p className="pb-4 sm:pb-0">Manage your subscription on Stripe.</p>
+    <div className="card card-bordered bg-base-100 shadow-xl w-96 max-w-full m-2">
+      <div className="card-body">
+        <h2 className="card-title">Your Plan</h2>
+        <p>
+          You are currently on the <b>{subscription.prices?.products?.name}</b>{' '}
+          plan.
+        </p>
+        <p className="font-semibold my-2">{`${subscriptionPrice}/${subscription.prices?.interval}`}</p>
+        <div className="card-actions justify-end">
           <Button
             variant="slim"
             onClick={handleStripePortalRequest}
@@ -63,15 +58,7 @@ export default function CustomerPortalForm({ subscription }: Props) {
             Open customer portal
           </Button>
         </div>
-      }
-    >
-      <div className="mt-8 mb-4 text-xl font-semibold">
-        {subscription ? (
-          `${subscriptionPrice}/${subscription?.prices?.interval}`
-        ) : (
-          <Link href="/">Choose your plan</Link>
-        )}
       </div>
-    </Card>
+    </div>
   );
 }

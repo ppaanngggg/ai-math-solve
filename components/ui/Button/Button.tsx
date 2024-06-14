@@ -1,11 +1,9 @@
 'use client';
 
 import cn from 'classnames';
-import React, { forwardRef, useRef, ButtonHTMLAttributes } from 'react';
+import React, { ButtonHTMLAttributes, forwardRef, useRef } from 'react';
 import { mergeRefs } from 'react-merge-refs';
-
 import LoadingDots from '@/components/ui/LoadingDots';
-
 import styles from './Button.module.css';
 
 interface Props extends ButtonHTMLAttributes<HTMLButtonElement> {

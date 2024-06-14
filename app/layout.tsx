@@ -1,14 +1,18 @@
 import { Metadata } from 'next';
 import Footer from '@/components/ui/Footer';
-import Navbar from '@/components/ui/Navbar';
+import Navbar from '@/components/ui/Navbar/Navbar';
 import { Toaster } from '@/components/ui/Toasts/toaster';
 import { PropsWithChildren, Suspense } from 'react';
 import { getURL } from '@/utils/helpers';
 import 'styles/main.css';
+import { Inter } from 'next/font/google';
+import clsx from 'clsx';
+
+const inter = Inter({ subsets: ['latin'] });
 
 const meta = {
-  title: 'Next.js Subscription Starter',
-  description: 'Brought to you by Vercel, Stripe, and Supabase.',
+  title: 'AI Math Solver',
+  description: 'Your smartest assistant to help you solve math problems.',
   cardImage: '/og.png',
   robots: 'follow, index',
   favicon: '/favicon.ico',
@@ -47,13 +51,15 @@ export async function generateMetadata(): Promise<Metadata> {
 
 export default async function RootLayout({ children }: PropsWithChildren) {
   return (
-    <html lang="en">
-      <body className="bg-black">
+    <html data-theme="cupcake" lang="en">
+      <body
+        className={clsx(
+          'min-h-screen flex flex-col subpixel-antialiased',
+          inter.className
+        )}
+      >
         <Navbar />
-        <main
-          id="skip"
-          className="min-h-[calc(100dvh-4rem)] md:min-h[calc(100dvh-5rem)]"
-        >
+        <main className="flex-1 flex flex-col items-center justify-center bg-base-200">
           {children}
         </main>
         <Footer />
