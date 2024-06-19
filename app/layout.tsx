@@ -12,7 +12,8 @@ const inter = Inter({ subsets: ['latin'] });
 
 const meta = {
   title: 'AI Math Solver',
-  description: 'Your smartest assistant to help you solve math problems.',
+  description:
+    'Your best AI assistant solve math problems with step-by-step solutions. Try it now! - AI Math Solver',
   cardImage: '/og.png',
   robots: 'follow, index',
   favicon: '/favicon.ico',
