@@ -13,7 +13,7 @@ export default async function Account() {
     return redirect('/signin');
   }
 
-  const { data: subscription, error } = await supabase
+  const { data: subscription } = await supabase
     .from('subscriptions')
     .select('*, prices(*, products(*))')
     .in('status', ['trialing', 'active'])
@@ -21,8 +21,8 @@ export default async function Account() {
     .limit(1)
     .maybeSingle();
 
-  if (error) {
-    console.log(error);
+  if (!subscription) {
+    return redirect('/pricing');
   }
 
   return (

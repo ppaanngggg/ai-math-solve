@@ -24,7 +24,7 @@ export default async function MainPage() {
       ) : (
         <>
           <h1 className="text-5xl font-extrabold">AI Math Solver 🥳</h1>
-          <Link href={user != null ? '/pricing' : '/signin/signup'}>
+          <Link href={user != null ? '/pricing' : '/signin'}>
             <button className="m-6 btn btn-neutral ">{'Get Start !'}</button>
           </Link>
         </>
