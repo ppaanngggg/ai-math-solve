@@ -7,6 +7,7 @@ import { getURL } from '@/utils/helpers';
 import 'styles/main.css';
 import { Inter } from 'next/font/google';
 import clsx from 'clsx';
+import { GoogleAnalytics } from '@next/third-parties/google';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -67,6 +68,7 @@ export default async function RootLayout({ children }: PropsWithChildren) {
         <Suspense>
           <Toaster />
         </Suspense>
+        <GoogleAnalytics gaId="G-PLRB728EP9" />
       </body>
     </html>
   );
