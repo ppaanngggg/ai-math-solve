@@ -1,5 +1,5 @@
 'use client';
-
+import imageCompression from 'browser-image-compression';
 import { useState } from 'react';
 import { generate } from '@/utils/ai/generate';
 import { readStreamableValue } from 'ai/rsc';
@@ -63,9 +63,17 @@ function InputMessages(props: {
 }
 
 async function getBase64(file: File): Promise<string> {
+  // console.log(`originalFile size ${file.size / 1024 / 1024} MB`);
+  const compressedFile = await imageCompression(file, {
+    maxSizeMB: 0.5,
+    maxWidthOrHeight: 1024,
+    useWebWorker: false,
+    fileType: 'image/jpeg'
+  });
+  // console.log(`compressedFile size ${compressedFile.size / 1024 / 1024} MB`); // smaller than maxSizeMB
   return new Promise((resolve) => {
     const reader = new FileReader();
-    reader.readAsDataURL(file);
+    reader.readAsDataURL(compressedFile);
     reader.onload = () => {
       resolve(reader.result as string);
     };
