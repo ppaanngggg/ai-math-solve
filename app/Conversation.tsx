@@ -201,7 +201,7 @@ export default function Conversation() {
                     'You are an professional and patient math teacher. ' +
                     'Help user solve the following math problem. ' +
                     'Thinking step by step and give the answer finally. ' +
-                    'Print as markdown and latex. ' +
+                    'MUST PRINT as markdown and latex, DO NOT use html tags. ' +
                     'If no math problem found, refuse to answer.'
                 },
                 ...finalMessages
