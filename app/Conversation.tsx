@@ -207,11 +207,15 @@ export default function Conversation() {
                 ...finalMessages
               ];
               setGenerating(true);
+              const startTime = performance.now();
               const outputStream = await generate(finalMessages);
               let buf = '';
               for await (const delta of readStreamableValue(outputStream)) {
                 buf += delta;
                 setTextOutput(buf);
+                if (performance.now() - startTime > 55 * 1000) {
+                  break;
+                }
               }
               setGenerating(false);
             }}

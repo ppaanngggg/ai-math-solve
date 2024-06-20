@@ -2,6 +2,8 @@ import Link from 'next/link';
 import { createClient } from '@/utils/supabase/server';
 import Conversation from '@/app/Conversation';
 
+export const maxDuration = 60;
+
 export default async function MainPage() {
   const supabase = createClient();
 
