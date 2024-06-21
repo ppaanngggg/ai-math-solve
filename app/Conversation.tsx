@@ -7,6 +7,7 @@ import { CoreMessage } from 'ai';
 import {
   MdAddCircleOutline,
   MdDelete,
+  MdDeleteForever,
   MdEdit,
   MdOutlineSend
 } from 'react-icons/md';
@@ -31,7 +32,9 @@ function InputMessages(props: {
           {
             // if it's string, just show it, else if it is image, preview image, if it is text, show the text
             typeof message.content === 'string' ? (
-              message.content
+              <MathpixLoader>
+                <MathpixMarkdown text={message.content} />
+              </MathpixLoader>
             ) : message.content[0].type === 'image' ? (
               <img
                 alt=""
@@ -40,8 +43,6 @@ function InputMessages(props: {
                 }
                 className="object-scale-down"
               />
-            ) : message.content[0].type === 'text' ? (
-              message.content[0].text
             ) : (
               ''
             )
@@ -237,14 +238,25 @@ export default function Conversation() {
           {generating ? (
             <></>
           ) : (
-            <button
-              className="bg-success/50 text-base-100 rounded-full p-1.5 m-10 shadow-lg hover:scale-110 hover:bg-success"
-              onClick={() => {
-                setTextOutput('');
-              }}
-            >
-              <MdEdit size={36} />
-            </button>
+            <p className="m-10 space-x-4">
+              <button
+                className="bg-success/50 text-base-100 rounded-full p-1.5 shadow-lg hover:scale-110 hover:bg-success"
+                onClick={() => {
+                  setTextOutput('');
+                }}
+              >
+                <MdEdit size={36} />
+              </button>
+              <button
+                className="bg-error/50 text-base-100 rounded-full p-1.5 shadow-lg hover:scale-110 hover:bg-error"
+                onClick={() => {
+                  setMessages([]);
+                  setTextOutput('');
+                }}
+              >
+                <MdDeleteForever size={36} />
+              </button>
+            </p>
           )}
         </>
       )}
