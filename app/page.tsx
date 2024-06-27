@@ -1,6 +1,6 @@
-import Link from 'next/link';
 import { createClient } from '@/utils/supabase/server';
 import Conversation from '@/app/Conversation';
+import Homepage from '@/app/Homepage';
 
 export const maxDuration = 60;
 
@@ -24,12 +24,7 @@ export default async function MainPage() {
       {user != null && subscription != null ? (
         <Conversation />
       ) : (
-        <>
-          <h1 className="text-5xl font-extrabold">AI Math Solver 🥳</h1>
-          <Link href={user != null ? '/pricing' : '/signin'}>
-            <button className="m-6 btn btn-neutral ">{'Get Start !'}</button>
-          </Link>
-        </>
+        <Homepage user={user} />
       )}
     </>
   );

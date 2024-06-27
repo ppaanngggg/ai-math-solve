@@ -161,7 +161,7 @@ export default function Conversation() {
   const editable = !generating && textOutput === '';
 
   return (
-    <div className="flex flex-col w-[60rem] max-w-full items-center p-2 mt-5">
+    <div className="p-2 my-5 flex flex-col w-[60rem] max-w-full items-center">
       <InputMessages
         messages={messages}
         setMessages={setMessages}
