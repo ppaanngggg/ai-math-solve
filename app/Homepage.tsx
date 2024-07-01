@@ -15,7 +15,7 @@ export default function Homepage(props: { user: User | null }) {
       <div className="mt-12 w-full h-[20rem] card card-side bg-base-100 shadow-xl">
         <figure className="w-[20rem] h-[20rem]">
           <Image
-            src="/cover.jpg"
+            src="/cover.webp"
             alt="cover image - robot teach student to learn math"
             width={300}
             height={300}
